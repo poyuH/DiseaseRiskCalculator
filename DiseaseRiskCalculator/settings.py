@@ -25,8 +25,9 @@ SECRET_KEY = '@for_git_hub'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [u'poyu0987.pythonanywhere.com']
-
+# ALLOWED_HOSTS = [u'poyu0987.pythonanywhere.com']
+# Work in local
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -75,11 +76,19 @@ WSGI_APPLICATION = 'DiseaseRiskCalculator.wsgi.application'
 
 DATABASES = {
     'default': {
+        # for localhost
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'poyu0987$DiseaseRiskCalculator',
-        'USER': 'poyu0987',
+        'USER': 'root',
         'PASSWORD': 'forgithub',
-        'HOST': 'poyu0987.mysql.pythonanywhere-services.com'
+        'HOST': 'localhost'
+
+        # for pythonanywhere
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'poyu0987$DiseaseRiskCalculator',
+        # 'USER': 'poyu0987',
+        # 'PASSWORD': 'forgithub',
+        # 'HOST': 'poyu0987.mysql.pythonanywhere-services.com'
     }
 }
 
