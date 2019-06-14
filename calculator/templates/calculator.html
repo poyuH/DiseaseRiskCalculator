@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<h1>Hello from the other side</h1>
+<form action=".", method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit", name='sub'><br>
+</form>
+<h2>your bmi: {{bmi}}</h2>
+<h3>your 10-year Atherosclerotic Cardiovascular Disease <br> 
+    (including cardiac diseases and stroke) risk: <br>
+    {{ascvd_risk}}%</h3>
+<h3>your dm risk: {{dm_risk}}%</h3>
+
+{% endblock %}
+
