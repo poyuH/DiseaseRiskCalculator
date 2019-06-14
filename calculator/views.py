@@ -19,7 +19,6 @@ def calculator(request):
             tc = form.cleaned_data['tc']
             hdl = form.cleaned_data['hdl']
             sbp = form.cleaned_data['sbp']
-            dbp = form.cleaned_data['dbp']
             is_dm = form.cleaned_data['is_dm']
             is_treated_htn = form.cleaned_data['is_treated_htn']
             smoker = form.cleaned_data['smoker']

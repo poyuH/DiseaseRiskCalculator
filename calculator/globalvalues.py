@@ -1,14 +1,14 @@
 def get_gender():
     GENDER = (
-        ( 0,'male' ),
-        ( 1,'female' )
+        ( 0,'female' ),
+        ( 1,'male' )
     )
     return GENDER
 
 def get_race():
     RACE = (
-        ( 0, 'African American' ),
-        ( 1, 'Other' )
+        ( 0, 'Other' ),
+        ( 1, 'African American' )
     )
     return RACE
 
@@ -27,7 +27,6 @@ def get_smoking_status():
         ( 2, 'Current smoker' ),
     )
     return SMOKER
-
 
 def get_steroid_status():
     IS_STEROID = (
