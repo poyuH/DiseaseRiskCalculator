@@ -159,7 +159,7 @@ def get_dm_risk(age, gender, is_treated_htn, is_steroid, smoker,
     elif bmi >= 27.5 and bmi < 30:
         bmi_val = 1.97
     else:
-        bmi_val = 2.581
+        bmi_val = 2.518
     if family_hx == 0: # no diabetic 1st-degree relative
         family_hx_val = 0
     elif family_hx == 1: #  if parent or sibling with diabetes
