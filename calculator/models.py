@@ -3,11 +3,12 @@ from . import globalvalues
 
 # Create your models here.
 class Calculator(models.Model):
-    """docstring for Calculator"""
-    # TODO add member as foreignkey
-    # member = models.ForeignKey(PATH_TO_MEMBER_CLASS, on_delete=models.CASCADE)
+    # TODO uid = models.ForeignKey(, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
-
+    """
+    class Meta:
+        unique_together = ((uid, date))
+    """
 
     GENDER = globalvalues.get_gender()
     RACE = globalvalues.get_race()
@@ -27,22 +28,14 @@ class Calculator(models.Model):
     sbp = models.PositiveSmallIntegerField()
 
     ###### Parameters for 10-year ASCVD risk ######
+    is_dm = models.PositiveSmallIntegerField(choices=IS_DM)
     tc = models.PositiveSmallIntegerField()
     hdl = models.PositiveSmallIntegerField()
-    is_dm = models.PositiveSmallIntegerField(choices=IS_DM)
-
-    ###### Parameters for undiagnosed DM ######
-    family_hx = models.PositiveSmallIntegerField(choices=FAMILY_HX)
-    is_steroid = models.PositiveSmallIntegerField(choices=IS_STEROID)
 
     ###### Parameters for both calculator ######
     is_treated_htn = models.PositiveSmallIntegerField(choices=IS_TREATED_HTN)
     smoker = models.PositiveSmallIntegerField(choices=SMOKER)
-    def calculate_cv(self):
-        # TODO
-        return
-    def calculate_dm(self):
-        # TODO
-        return
 
-
+    ###### Parameters for undiagnosed DM ######
+    family_hx = models.PositiveSmallIntegerField(choices=FAMILY_HX)
+    is_steroid = models.PositiveSmallIntegerField(choices=IS_STEROID)
