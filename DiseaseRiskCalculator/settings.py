@@ -29,6 +29,9 @@ DEBUG = True
 # Work in local
 ALLOWED_HOSTS = []
 
+# Create my own user
+AUTH_USER_MODEL = 'user.CustomUser'
+
 # Application definition
 
 INSTALLED_APPS = [
