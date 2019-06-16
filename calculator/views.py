@@ -6,6 +6,7 @@ from . import riskcalc
 def calculator(request):
     if request.method == 'POST':
         form = CalculatorForm(request.POST)
+        print(request.POST)
         if form.is_valid():
             weight = form.cleaned_data['weight']
             height = form.cleaned_data['height']

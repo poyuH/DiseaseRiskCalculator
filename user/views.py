@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from user.forms import CustomUserCreationForm, CustomUserChangeForm
 from user.models import CustomUser
+from django.urls import reverse
 
 # Create your views here.
 def register(request):
@@ -9,7 +10,7 @@ def register(request):
         print("Errors", form.errors)
         if form.is_valid():
             form.save()
-            return redirect('../admin')
+            return redirect(reverse('admin'))
         else:
             return render(request, 'register.html', {'form':form})
     else:
