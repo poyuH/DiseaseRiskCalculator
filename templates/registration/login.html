@@ -1,12 +1,11 @@
-{% extends 'layout.html' %}
-{% block content %}
-
-<h2>Login Page</h2>
-<form action=".", method="POST">
+<form action={% url 'login'%}  method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit", name='sub'><br>
+    <label for="username">Email address:</label>
+    <input type="text" name="username" value="" id="username"> <br />
+    <label for="password">Password:</label>
+    <input type="password" name="password" value="" id="password"> <br />
+    <input type="submit" value="Login" name="login" />
+    <a href={% url 'register' %}>
+        <input type="button" name="register" value="Register"> <br />
+    </a>
 </form>
-
-{% endblock %}
-
