@@ -2,13 +2,11 @@ from django.db import models
 from . import globalvalues
 
 # Create your models here.
-class Calculator(models.Model):
-    # TODO uid = models.ForeignKey(, on_delete=models.CASCADE)
+class CalculatorModel(models.Model):
+    uid = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
-    """
     class Meta:
-        unique_together = ((uid, date))
-    """
+        unique_together = (('uid', 'date'))
 
     GENDER = globalvalues.get_gender()
     RACE = globalvalues.get_race()
@@ -39,3 +37,8 @@ class Calculator(models.Model):
     ###### Parameters for undiagnosed DM ######
     family_hx = models.PositiveSmallIntegerField(choices=FAMILY_HX)
     is_steroid = models.PositiveSmallIntegerField(choices=IS_STEROID)
+
+    ###### risks and bmi ######
+    ascvd_risk = models.FloatField(null=True)
+    bmi = models.FloatField(null=True)
+    dm_risk = models.FloatField(null=True)

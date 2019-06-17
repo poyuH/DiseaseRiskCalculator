@@ -1,9 +1,9 @@
 from django import forms
-from .models import Calculator
+from .models import CalculatorModel
 
 
 class CalculatorForm(forms.ModelForm):
     class Meta:
-        model  = Calculator
-        fields = '__all__'
+        model  = CalculatorModel
+        exclude = ['uid', 'date', 'ascvd_risk', 'bmi', 'dm_risk']
 

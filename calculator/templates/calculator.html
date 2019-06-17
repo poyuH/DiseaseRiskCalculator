@@ -1,7 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+{% if user.is_authenticated %}
+<h1>Hello {{user.email}}</h1> 
+{% else %}
 <h1>Hello from the other side</h1>
+{% endif %}
 <form action=".", method="POST">
     {% csrf_token %}
     {{form.as_p}}
