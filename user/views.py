@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from user.forms import CustomUserCreationForm, CustomUserChangeForm
 from user.models import CustomUser
-from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse, path
+from datetime import date
 
 # Create your views here.
 PATH_TO_CALC = '../../calc'
@@ -17,3 +19,8 @@ def register(request):
     else:
         form = CustomUserCreationForm()
         return render(request, 'register.html', {'form': form})
+
+
+def logout_redirect(request):
+    logout(request)
+    return redirect(PATH_TO_CALC)

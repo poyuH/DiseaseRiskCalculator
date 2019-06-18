@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 # Create my own user
 AUTH_USER_MODEL = 'user.CustomUser'
 
+# Add login redirect url
+LOGIN_REDIRECT_URL = '/calc/'
+
 # Application definition
 
 INSTALLED_APPS = [

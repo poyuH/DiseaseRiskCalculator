@@ -1,5 +1,11 @@
 <form action={% url 'login'%}  method="POST">
     {% csrf_token %}
+    {% if user.is_authenticated%}
+    <h6>Hello {{user.email}}</h6>
+    <a href={% url 'logout'%}>
+        <input type="button" name="logout" value="Logout"><br>
+    </a>
+
     <label for="username">Email address:</label>
     <input type="text" name="username" value="" id="username"> <br />
     <label for="password">Password:</label>
@@ -8,4 +14,5 @@
     <a href={% url 'register' %}>
         <input type="button" name="register" value="Register"> <br />
     </a>
+    {% endif %}
 </form>
