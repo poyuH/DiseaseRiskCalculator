@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import CalculatorForm
 from .models import CalculatorModel
 from . import globalvalues
@@ -9,6 +10,7 @@ from datetime import date
 # Create your views here.
 def calculator(request):
     if request.method == 'POST':
+        objects = None
         form = CalculatorForm(request.POST)
         if form.is_valid():
             risk_dict = _calculate_risk(form)
@@ -19,18 +21,25 @@ def calculator(request):
                 all_dict.update(form.cleaned_data)
                 obj, is_created = CalculatorModel.objects.update_or_create(
                     date = date.today(), uid_id = request.user.id, defaults=all_dict)
+                # use objects for graph function
+                objects = _filter_data_by_uid(request.user.id)
 
             return render(request, 'calculator.html',
                           {'form': form, 'bmi': risk_dict['bmi'],
                            'ascvd_risk': risk_dict['ascvd_risk'],
-                           'dm_risk': risk_dict['dm_risk']})
+                           'dm_risk': risk_dict['dm_risk'],
+                           'objects': objects})
 
     else: # method == 'GET'
         gender, race, age = None, None, None
+        objects = None
         if request.user.is_active:
             gender = request.user.gender
             race = request.user.race
             age = date.today().year - request.user.birthyear
+            # use objects for graph function
+            objects = _filter_data_by_uid(request.user.id)
+
         # is_active set to False if the account is deleted
         # No need for checking authenticated
         """
@@ -46,7 +55,17 @@ def calculator(request):
 
         form = CalculatorForm(initial=
                               {'gender': gender, 'race': race, 'age': age})
-        return render(request, 'calculator.html', {'form': form})
+        return render(request, 'calculator.html',
+                      {'form': form, 'objects': objects})
+
+
+def _filter_data_by_uid(uid):
+    try:
+       objects = CalculatorModel.objects.filter(uid_id=uid)
+       return objects
+    except ObjectDoesNotExist:
+        print('uid not found')
+
 
 def _calculate_risk(form):
     """

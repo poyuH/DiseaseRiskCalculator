@@ -11,11 +11,18 @@
     {{form.as_p}}
     <input type="submit", name='sub'><br>
 </form>
-<h2>your bmi: {{bmi}}</h2>
-<h3>your 10-year Atherosclerotic Cardiovascular Disease <br> 
+<h4>your bmi: {{bmi}}</h4>
+<h4>your 10-year Atherosclerotic Cardiovascular Disease <br> 
     (including cardiac diseases and stroke) risk: <br>
-    {{ascvd_risk}}%</h3>
-<h3>your dm risk: {{dm_risk}}%</h3>
-
+    {{ascvd_risk}}%</h4>
+<h4>your dm risk: {{dm_risk}}%</h4>
+{% if user.is_active %}
+    <h4> Your previous data: </h4>
+    {% for o in objects %}
+        <p>date: {{ o.date }}</p><br>
+        <p>weight: {{ o.weight }}</p><br>
+        <p>age: {{ o.age }}</p><br>
+    {% endfor %}
+{% endif %}
 {% endblock %}
 

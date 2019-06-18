@@ -13,11 +13,22 @@ def register(request):
         print("Errors", form.errors)
         if form.is_valid():
             form.save()
+            # directly login after register
+            user = authenticate(request, username=form.cleaned_data['email'],
+                                password=form.cleaned_data['password1'])
+            if user is not None:
+                login(request, user)
             return redirect(PATH_TO_CALC)
         else:
             return render(request, 'register.html', {'form':form})
     else:
-        form = CustomUserCreationForm()
+        age, gender, race = None, None, None
+        if request.user.is_active:
+            age = date.today().year - request.user.birthyear
+            gender = request.user.gender
+            race = request.user.race
+        form = CustomUserCreationForm(
+            initial={'age':age, 'gender':gender , 'race':race})
         return render(request, 'register.html', {'form': form})
 
 
