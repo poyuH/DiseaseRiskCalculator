@@ -31,6 +31,9 @@ def calculator(request):
             gender = request.user.gender
             race = request.user.race
             age = date.today().year - request.user.birthyear
+        # is_active set to False if the account is deleted
+        # No need for checking authenticated
+        """
         elif request.user.is_authenticated:
             try:
                 obj = CustomUser.objects.get(email=request.user.email)
@@ -39,6 +42,7 @@ def calculator(request):
             gender = obj.gender
             race = obj.race
             age = date.today().year - obj.birthyear
+        """
 
         form = CalculatorForm(initial=
                               {'gender': gender, 'race': race, 'age': age})
