@@ -29,12 +29,28 @@
 <div class="row">
 {% if user.is_active %}
 <div class="col">
-    <div class="card">
+    <div class="card col-12">
         <div class="card-header">
-            <h4> Your previous bmi </h4>
+            <h4> Your previous BMI </h4>
         </div>
         <div class="card-block">
             <canvas id="bmiChart"></canvas>
+        </div>
+    </div>
+    <div class="card col-12">
+        <div class="card-header">
+            <h4> Your previous Atherosclerotic Cardiovascular Disease Risk </h4>
+        </div>
+        <div class="card-block">
+            <canvas id="ascvdChart"></canvas>
+        </div>
+    </div>
+    <div class="card col-12">
+        <div class="card-header">
+            <h4> Your previous DM Risk </h4>
+        </div>
+        <div class="card-block">
+            <canvas id="dmChart"></canvas>
         </div>
     </div>
 {% endif %}
@@ -42,23 +58,16 @@
 <script src="{% static 'js/graph.js' %}"></script>
 <!-- Material Design Bootstrap -->
 <script>
-    $("h4").greenify();
-    var ctx = $("bmiChart");
-    var ctx = document.getElementById('bmiChart').getContext('2d');
+    var ctxBmi = document.getElementById('bmiChart').getContext('2d');
+    var ctxAscvdRisk = document.getElementById('ascvdChart').getContext('2d');
+    var ctxDmRisk = document.getElementById('dmChart').getContext('2d');
     var data = {{data | safe}};
-    data = transformData(data, 'ascvd_risk');
-    drawLineChart(ctx, data, "Cardiovascular Risk");
+    dataBmi = transformData(data, 'bmi');
+    dataAscvdRisk = transformData(data, 'ascvd_risk');
+    dataDmRisk = transformData(data, 'dm_risk');
+    drawLineChart(ctxBmi, dataBmi, "BMI");
+    drawLineChart(ctxAscvdRisk, dataAscvdRisk, "Cardiovascular Disease Risk %");
+    drawLineChart(ctxDmRisk, dataDmRisk, "DM Risk %");
 </script>
-<!--     
-    var ctx = document.getElementById("bmi-chart").getContext('2d');
-    $(ctx).drawLineGraph();
-    var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: datas,
-        options: {
-            pointBorderWidth: 5
-        }
-    });
--->
 {% endblock %}
 
