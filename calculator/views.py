@@ -11,66 +11,47 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 def calculator(request):
+    data = {'date': [], 'bmi': [], 'ascvd_risk': [], 'dm_risk': [], 'sbp': []}
+    objects = None
+    risk_dict = {'bmi': ' ', 'ascvd_risk': ' ', 'dm_risk': ' '}
+
     if request.method == 'POST':
-        objects = None
-        data = {'date': [], 'bmi': [], 'ascvd_risk': []}
         form = CalculatorForm(request.POST)
         if form.is_valid():
             risk_dict = _calculate_risk(form)
             # update or save data
-            if request.user.is_authenticated:
+            if request.user.is_active:
                 all_dict = {'uid': request.user, 'date': date.today()}
                 all_dict.update(risk_dict)
                 all_dict.update(form.cleaned_data)
                 obj, is_created = CalculatorModel.objects.update_or_create(
                     date = date.today(), uid_id = request.user.id, defaults=all_dict)
-                # use objects for graph function
-                objects = _filter_data_by_uid(request.user.id)
-                for o in objects:
-                    str_date = o.date.strftime("%m/%d/%Y")
-                    data['date'].append(str_date)
-                    data['bmi'].append(o.bmi)
-                    data['ascvd_risk'].append(o.ascvd_risk)
-
-            return render(request, 'calculator.html',
-                          {'form': form, 'bmi': risk_dict['bmi'],
-                           'ascvd_risk': risk_dict['ascvd_risk'],
-                           'dm_risk': risk_dict['dm_risk'],
-                           'data': data})
-
     else: # method == 'GET'
         gender, race, age = None, None, None
-        objects = None
-        data = {'date': [], 'bmi': []}
+        # is_active is set to False if the account is deleted
+        # so we need to check if the user is still active
         if request.user.is_active:
             gender = request.user.gender
             race = request.user.race
             age = date.today().year - request.user.birthyear
-            # use objects for graph function
-            objects = _filter_data_by_uid(request.user.id)
-            for o in objects:
-                str_date = o.date.strftime("%m/%d/%Y")
-                data['date'].append(str_date)
-                data['bmi'].append(o.bmi)
-                data['ascvd_risk'].append(o.ascvd_risk)
-
-        # is_active set to False if the account is deleted
-        # No need for checking authenticated
-        """
-        elif request.user.is_authenticated:
-            try:
-                obj = CustomUser.objects.get(email=request.user.email)
-            except :
-                print('can\'t find user by email')
-            gender = obj.gender
-            race = obj.race
-            age = date.today().year - obj.birthyear
-        """
-
         form = CalculatorForm(initial=
                               {'gender': gender, 'race': race, 'age': age})
-        return render(request, 'calculator.html',
-                      {'form': form, 'data': json.dumps(data)})
+
+    # use objects for Chart.js function
+    objects = _filter_data_by_uid(request.user.id)
+    for o in objects:
+        str_date = o.date.strftime("%m/%d/%Y")
+        data['date'].append(str_date)
+        data['bmi'].append(o.bmi)
+        data['ascvd_risk'].append(o.ascvd_risk)
+        data['dm_risk'].append(o.dm_risk)
+        data['sbp'].append(o.sbp)
+
+    return render(request, 'calculator.html',
+                  {'form': form, 'bmi': risk_dict['bmi'],
+                   'ascvd_risk': risk_dict['ascvd_risk'],
+                   'dm_risk': risk_dict['dm_risk'],
+                   'data': json.dumps(data)})
 
 
 def _filter_data_by_uid(uid):
