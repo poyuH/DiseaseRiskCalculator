@@ -35,6 +35,10 @@ AUTH_USER_MODEL = 'user.CustomUser'
 # Add login redirect url
 LOGIN_REDIRECT_URL = '/calc/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -139,7 +143,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # default static files settings for PythonAnywhere.
 # see https://help.pythonanywhere.com/pages/DjangoStaticFiles for more info

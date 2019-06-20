@@ -6,11 +6,14 @@ from . import globalvalues
 from user.models import CustomUser
 from . import riskcalc
 from datetime import date
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 def calculator(request):
     if request.method == 'POST':
         objects = None
+        data = {'date': [], 'bmi': [], 'ascvd_risk': []}
         form = CalculatorForm(request.POST)
         if form.is_valid():
             risk_dict = _calculate_risk(form)
@@ -23,22 +26,33 @@ def calculator(request):
                     date = date.today(), uid_id = request.user.id, defaults=all_dict)
                 # use objects for graph function
                 objects = _filter_data_by_uid(request.user.id)
+                for o in objects:
+                    str_date = o.date.strftime("%m/%d/%Y")
+                    data['date'].append(str_date)
+                    data['bmi'].append(o.bmi)
+                    data['ascvd_risk'].append(o.ascvd_risk)
 
             return render(request, 'calculator.html',
                           {'form': form, 'bmi': risk_dict['bmi'],
                            'ascvd_risk': risk_dict['ascvd_risk'],
                            'dm_risk': risk_dict['dm_risk'],
-                           'objects': objects})
+                           'data': data})
 
     else: # method == 'GET'
         gender, race, age = None, None, None
         objects = None
+        data = {'date': [], 'bmi': []}
         if request.user.is_active:
             gender = request.user.gender
             race = request.user.race
             age = date.today().year - request.user.birthyear
             # use objects for graph function
             objects = _filter_data_by_uid(request.user.id)
+            for o in objects:
+                str_date = o.date.strftime("%m/%d/%Y")
+                data['date'].append(str_date)
+                data['bmi'].append(o.bmi)
+                data['ascvd_risk'].append(o.ascvd_risk)
 
         # is_active set to False if the account is deleted
         # No need for checking authenticated
@@ -56,7 +70,7 @@ def calculator(request):
         form = CalculatorForm(initial=
                               {'gender': gender, 'race': race, 'age': age})
         return render(request, 'calculator.html',
-                      {'form': form, 'objects': objects})
+                      {'form': form, 'data': json.dumps(data)})
 
 
 def _filter_data_by_uid(uid):

@@ -1,28 +1,64 @@
 {% extends 'layout.html' %}
 {% block content %}
+{% load static %}
+{% load staticfiles %}
 
-{% if user.is_authenticated %}
-<h1>Hello {{user.email}}</h1> 
+<div class="row">
+{% if user.is_active %}
+    <h1>Hello {{user.email}}</h1> 
 {% else %}
-<h1>Hello from the other side</h1>
+    <h1>Hello from the other side</h1>
 {% endif %}
+</div>
+
+<div class="row">
+<div class="col-12 col-md-8">
 <form action=".", method="POST">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit", name='sub'><br>
+    <input type="submit", name='sub'>
 </form>
-<h4>your bmi: {{bmi}}</h4>
-<h4>your 10-year Atherosclerotic Cardiovascular Disease <br> 
-    (including cardiac diseases and stroke) risk: <br>
-    {{ascvd_risk}}%</h4>
-<h4>your dm risk: {{dm_risk}}%</h4>
+</div>
+    <div class="col-md-4">
+        <h4>your bmi: {{bmi}}</h4>
+        <h4>your 10-year Atherosclerotic 
+            Cardiovascular Disease (including cardiac diseases and stroke) 
+            risk: {{ascvd_risk}}%</h4>
+        <h4>your dm risk: {{dm_risk}}%</h4></div>
+</div>
+<div class="row">
 {% if user.is_active %}
-    <h4> Your previous data: </h4>
-    {% for o in objects %}
-        <p>date: {{ o.date }}</p><br>
-        <p>weight: {{ o.weight }}</p><br>
-        <p>age: {{ o.age }}</p><br>
-    {% endfor %}
+<div class="col">
+    <div class="card">
+        <div class="card-header">
+            <h4> Your previous bmi </h4>
+        </div>
+        <div class="card-block">
+            <canvas id="bmiChart"></canvas>
+        </div>
+    </div>
 {% endif %}
+</div>
+<script src="{% static 'js/graph.js' %}"></script>
+<!-- Material Design Bootstrap -->
+<script>
+    $("h4").greenify();
+    var ctx = $("bmiChart");
+    var ctx = document.getElementById('bmiChart').getContext('2d');
+    var data = {{data | safe}};
+    data = transformData(data, 'ascvd_risk');
+    drawLineChart(ctx, data, "Cardiovascular Risk");
+</script>
+<!--     
+    var ctx = document.getElementById("bmi-chart").getContext('2d');
+    $(ctx).drawLineGraph();
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: datas,
+        options: {
+            pointBorderWidth: 5
+        }
+    });
+-->
 {% endblock %}
 
