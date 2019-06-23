@@ -7,8 +7,8 @@
     <label for="password">Password:</label>
     <input type="password" name="password" value="" id="password"> <br />
     <input type="submit" value="Login" name="login" />
-    <a href={% url 'register' %}>
-        <input type="button" name="register" value="Register"> <br />
-    </a>
+    <input class="btn btn-primary" type="submit" value="Login" name="login" />
+    <a href={% url 'password_reset' %}>
+        <input class="btn btn-secondary"  type="button" name="password_reset" value="Reset Password"></a>
 </form>
 {% endblock %}
