@@ -2,11 +2,12 @@
 {% block content %}
 <form action={% url 'login'%}  method="POST">
     {% csrf_token %}
-    <label for="username">Email address:</label>
-    <input type="text" name="username" value="" id="username"> <br />
-    <label for="password">Password:</label>
-    <input type="password" name="password" value="" id="password"> <br />
-    <input type="submit" value="Login" name="login" />
+    <div class="form-group row">
+        <label for="username" class="col-sm-3 col-form-label">Email address</label>
+        <input class="form-control col-sm-9" type="email" name="username" value="" id="username">
+        <label for="password" class="col-sm-3 col-form-label">Password</label>
+        <input class="form-control col-sm-9" type="password" name="password" value="" id="password">
+    </div>
     <input class="btn btn-primary" type="submit" value="Login" name="login" />
     <a href={% url 'password_reset' %}>
         <input class="btn btn-secondary"  type="button" name="password_reset" value="Reset Password"></a>
