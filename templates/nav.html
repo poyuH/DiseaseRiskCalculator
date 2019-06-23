@@ -3,23 +3,23 @@
     <button class='navbar-toggler' data-toggle="collapse" data-target="#navbarMenu">
         <span class='navbar-toggler-icon'></span>
     </button>
-    <div id="navbarMenu" class="navbar-collapse bg-dark">
-        {% if user.is_authenticated %}
+    <div id="navbarMenu" class="navbar-collapse collapse bg-dark">
+        {% if user.is_active %}
         <span class="navbar-text text-center"> Hello, {{user.email}} </span>
         {% endif %}
         <ul class="navbar-nav list-group ml-auto">
-            {% if user.is_authenticated %}
+            {% if user.is_active %}
             <li class="nav-item list-group-item bg-dark" >
                 <a href={% url 'logout' %} class="nav-link">Logout</a>
             </li>
-            {% elif request.path != '/accounts/register/' %}
+            {% else %}
             <li class="nav-item list-group-item bg-dark">
                 <a href={% url 'login' %} class="nav-link">Login</a>
             </li>
             <li class="nav-item list-group-item bg-dark">
                 <a href={% url 'register' %} class="nav-link">Register</a>
             </li>
+            {% endif %}
         </ul>
-        {% endif %}
 </div>
 </nav>
