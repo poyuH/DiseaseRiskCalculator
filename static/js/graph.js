@@ -1,5 +1,6 @@
 function transformData(data, keyY) {
     var new_data = [];
+    console.log(data);
 
     for (i = 0; i < data['date'].length; i++) {
         new_data.push(

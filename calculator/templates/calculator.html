@@ -2,17 +2,21 @@
 {% block content %}
 {% load static %}
 {% load staticfiles %}
-
-<div class="row">
-{% if user.is_active %}
-    <h1>Hello {{user.email}}</h1> 
-{% else %}
-    <h1>Hello from the other side</h1>
-{% endif %}
+<div class="row" id="result">
+<ul class="list-group col-12">
+    <li class="list-group-item">Your BMI</li>
+    <li class="list-group-item"><b>{{bmi}}</b></li>
+    <li class="list-group-item">Your 10-year Atherosclerotic 
+        Cardiovascular Disease (including cardiac diseases and stroke) 
+        risk</li>
+    <li class="list-group-item"><b>{{ascvd_risk}}%</b></li>
+    <li class="list-group-item">Your risk of diabetes</li>
+    <li class="list-group-item"><b>{{dm_risk}}%</b></li>
+</ul>
 </div>
 
-<div class="row">
-<div class="col-12 col-md-8">
+<div class="row" style="padding-top:20px">
+<div class="col-12">
 <form action=".", method="POST">
     {% csrf_token %}
     <div class="form-group row">
@@ -112,16 +116,8 @@
     <input type="submit" name='sub' class="btn btn-primary">
 </form>
 </div>
-    <div class="col-md-4">
-        <h4>your bmi: {{bmi}}</h4>
-        <h4>your 10-year Atherosclerotic 
-            Cardiovascular Disease (including cardiac diseases and stroke) 
-            risk: {{ascvd_risk}}%</h4>
-        <h4>your dm risk: {{dm_risk}}%</h4></div>
-</div>
 <div class="row">
 {% if user.is_active %}
-<div class="col">
     <div class="card col-12">
         <div class="card-header">
             <h4> Your previous BMI </h4>
