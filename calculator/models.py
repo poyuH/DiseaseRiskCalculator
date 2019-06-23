@@ -24,6 +24,7 @@ class CalculatorModel(models.Model):
     weight = models.PositiveSmallIntegerField()
     height = models.PositiveSmallIntegerField()
     sbp = models.PositiveSmallIntegerField()
+    dbp = models.PositiveSmallIntegerField()
 
     ###### Parameters for 10-year ASCVD risk ######
     is_dm = models.PositiveSmallIntegerField(choices=IS_DM)

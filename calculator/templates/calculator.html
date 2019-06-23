@@ -15,8 +15,101 @@
 <div class="col-12 col-md-8">
 <form action=".", method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit", name='sub'>
+    <div class="form-group row">
+    <label for="age" class="col-md-1 col-form-label">Age</label>
+        <div class="col-md-3">
+            <input type="number" min=0 required class="form-control" name="age" placeholder="Age (year)" id="age"/>
+        </div>
+    <label class="col-md-1 col-form-label" for="gender">Gender</label>
+        <div class="col-md-3">
+        <select class="form-control" name="gender" id="gender">
+          <option value=0>Female</option>
+          <option value=1>Male</option>
+        </select>
+        </div>
+    <label class="col-md-1 col-form-label" for="race">Race</label>
+        <div class="col-md-3">
+        <select class="form-control" name="race" id="race">
+          <option value=0>Other</option>
+          <option value=1>African American</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+    <label for="weight" class="col-md-2 col-form-label">Weight</label>
+        <div class="col-md-4">
+            <input type="number" min=0 required class="form-control" name="weight" placeholder="Weight (kg)" id="weight"/>
+        </div>
+    <label for="height" class="col-md-2 col-form-label">Height</label>
+        <div class="col-md-4">
+            <input type="number" min=0 required class="form-control" name="height" placeholder="Height (cm)" id="height"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+    <label for="sbp" class="col-md-2 col-form-label">SBP</label>
+        <div class="col-md-4">
+            <input type="number" min=0 required class="form-control" name="sbp" placeholder="Systolic Blood Pressure (mmHg)" id="sbp"/>
+        </div>
+    <label for="dbp" class="col-md-2 col-form-label">DBP</label>
+        <div class="col-md-4">
+            <input type="number" min=0 required class="form-control" name="dbp" placeholder="Diastolic Blood Pressure (mmHg)" id="dbp"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+    <label for="tc" class="col-md-2 col-form-label">Total Cholesterol</label>
+        <div class="col-md-4">
+            <input type="number" min=0 required class="form-control" name="tc" placeholder="Total Cholesterol (mg/dL)" id="tc"/>
+        </div>
+    <label for="hdl" class="col-md-2 col-form-label">HDL-Cholesterol</label>
+        <div class="col-md-4">
+            <input type="number" min=0 required class="form-control" name="hdl" placeholder="HDL-Cholesterol (mg/dL)" id="hdl"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+    <label for="smoker" class="col-md-2 col-form-label">Smoking Status</label>
+        <div class="col-md-4">
+            <select class="form-control" name="smoker">
+                <option value="0">Non-smoker</option>
+                <option value="1">Ex-smoker</option>
+                <option value="2">Current smoker</option>
+            </select>
+        </div>
+    <label class="col-md-2 col-form-label" for="family_hx">Family History</label>
+        <div class="col-md-4">
+            <select class="form-control" name="family_hx">
+                <option value="0">No diabetic 1st-degree relatives</option>
+                <option value="1">Parent or sibling with diabetes</option>
+                <option value="2">Parent and sibling with diabetes</option>
+            </select>
+        </div>
+
+    <label for="is_dm" class="col-12 col-form-label">Are you diagnosed with diabetes?</label>
+        <div class="col-12">
+            <select class="form-control" name="is_dm">
+                <option value="0">Not diagnosed with diabetes</option>
+                <option value="1">Already been diagnosed with diabetes</option>
+            </select>
+        </div>
+    <label class="col-12 col-form-label" for="is_treated_htn">Are you taking antihypertensive agents?</label>
+        <div class="col-12">
+        <select class="form-control" name="is_treated_htn" id="is_treated_htn">
+          <option value=0>Not taking any antihypertensive</option>
+          <option value=1>Currently taking antihypertensive</option>
+        </select>
+        </div>
+    <label class="col-12 col-form-label" for="is_steroid">Are you taking steroids?</label>
+        <div class="col-12">
+        <select class="form-control" name="is_steroid" id="is_steroid">
+          <option value=0>Not taking any steroids</option>
+          <option value=1>Currently taking steroids</option>
+        </select>
+        </div>
+    </div>
+    <input type="submit" name='sub' class="btn btn-primary">
 </form>
 </div>
     <div class="col-md-4">
@@ -39,18 +132,10 @@
     </div>
     <div class="card col-12">
         <div class="card-header">
-            <h4> Your previous Atherosclerotic Cardiovascular Disease Risk </h4>
+            <h4> Your previous blood pressure </h4>
         </div>
         <div class="card-block">
-            <canvas id="ascvdChart"></canvas>
-        </div>
-    </div>
-    <div class="card col-12">
-        <div class="card-header">
-            <h4> Your previous DM Risk </h4>
-        </div>
-        <div class="card-block">
-            <canvas id="dmChart"></canvas>
+            <canvas id="bpChart"></canvas>
         </div>
     </div>
 {% endif %}
@@ -58,16 +143,26 @@
 <script src="{% static 'js/graph.js' %}"></script>
 <!-- Material Design Bootstrap -->
 <script>
+    $(document).ready(function(){
+        if ("{{user.is_active}}" == "True") {
+            $('#age').attr("value", {{age}});
+            $('#race').attr("value", {{race}});
+            $('#gender').attr("value", {{gender}});
+        };
+        if ("{{bmi}}" == " "){
+            console.log({{bmi}});
+            $('#result').css("display", "None");
+        };
+    });
+
     var ctxBmi = document.getElementById('bmiChart').getContext('2d');
-    var ctxAscvdRisk = document.getElementById('ascvdChart').getContext('2d');
-    var ctxDmRisk = document.getElementById('dmChart').getContext('2d');
+    var ctxBp = document.getElementById('bpChart').getContext('2d');
     var data = {{data | safe}};
     dataBmi = transformData(data, 'bmi');
-    dataAscvdRisk = transformData(data, 'ascvd_risk');
-    dataDmRisk = transformData(data, 'dm_risk');
-    drawLineChart(ctxBmi, dataBmi, "BMI");
-    drawLineChart(ctxAscvdRisk, dataAscvdRisk, "Cardiovascular Disease Risk %");
-    drawLineChart(ctxDmRisk, dataDmRisk, "DM Risk %");
+    dataSBP = transformData(data, 'sbp');
+    dataDBP = transformData(data, 'dbp');
+    drawLineChart(ctxBmi, [dataBmi], ["BMI"]);
+    drawLineChart(ctxBp, [dataSBP, dataDBP], ["SBP", "DBP"]);
 </script>
 {% endblock %}
 
