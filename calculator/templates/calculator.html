@@ -142,9 +142,9 @@
 <script>
     $(document).ready(function(){
         if ("{{user.is_active}}" == "True") {
-            $('#age').attr("value", {{age}});
-            $('#race').attr("value", {{race}});
-            $('#gender').attr("value", {{gender}});
+            $('#age').val({{age}});
+            $('#race').val({{race}});
+            $('#gender').val({{gender}});
         };
         if ("{{bmi}}" == " "){
             console.log({{bmi}});
