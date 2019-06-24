@@ -1,53 +1,54 @@
 {% extends "layout.html"%}
+{% load i18n %} 
 {% block content %}
 
-<h2>Register Page</h2> <br>
+<h2>{% blocktrans %}Register Page{% endblocktrans %}</h2> <br>
 <form action="", method="POST">
     {% csrf_token %}
     {% for field in form %}
     <p>
         {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
+        <p style="color: red">{% trans error %}</p>
         {% endfor %}
     </p>
     {% endfor %}
     <div class="form-group row">
-        <label for="email" class="col-sm-3 col-form-label">Email address</label>
+        <label for="email" class="col-sm-3 col-form-label">{% blocktrans %}Email address{% endblocktrans %}</label>
         <input id="email" type="email" class="col-sm-9 form-control" name="email">
     </div>
     <div class="form-group row">
-        <label for="birthyear" class="col-sm-3 col-form-label">Birth Year</label>
+        <label for="birthyear" class="col-sm-3 col-form-label">{% blocktrans %}Birth Year{% endblocktrans %}</label>
         <input id="birthyear" type="number" class="col-sm-9 form-control" name="birthyear">
     </div>
     <div class="form-group row">
-        <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+        <label for="gender" class="col-sm-3 col-form-label">{% blocktrans %}Gender{% endblocktrans %}</label>
         <select class="form-control col-sm-9" name="gender" id="gender">
-          <option value=0>Female</option>
-          <option value=1>Male</option>
+          <option value=0>{% blocktrans %}Female{% endblocktrans %}</option>
+          <option value=1>{% blocktrans %}Male{% endblocktrans %}</option>
         </select>
     </div>
 
     <div class="form-group row">
-        <label for="race" class="col-sm-3 col-form-label">Race</label>
+        <label for="race" class="col-sm-3 col-form-label">{% blocktrans %}Race{% endblocktrans %}</label>
         <select class="form-control col-sm-9" name="race" id="race">
-          <option value=0>Other</option>
-          <option value=1>African American</option>
+          <option value=0>{% blocktrans %}Other{% endblocktrans %}</option>
+          <option value=1>{% blocktrans %}African American{% endblocktrans %}</option>
         </select>
     </div>
 
     <div class="form-group row">
-        <label for="password1" class="col-sm-3 col-form-label">Password</label>
+        <label for="password1" class="col-sm-3 col-form-label">{% blocktrans %}Password{% endblocktrans %}</label>
         <input id="password1" type="password" class="col-sm-9 form-control" name="password1">
     </div>
 
     <div class="form-group row form-text">
-        <small style="color:grey">Your password can't be too similar to your other personal information.<br></small>
-        <small style="color:grey">Your password must contain at least 8 characters.<br></small>
-        <small style="color:grey">Your password can't be a commonly used password.<br></small>
-        <small style="color:grey">Your password can't be entirely numeric.<br></small>
+        <small style="color:grey">{% blocktrans %}Your password can't be too similar to your other personal information.{% endblocktrans %}<br></small>
+        <small style="color:grey">{% blocktrans %}Your password must contain at least 8 characters.{% endblocktrans %}<br></small>
+        <small style="color:grey">{% blocktrans %}Your password can't be a commonly used password.{% endblocktrans %}<br></small>
+        <small style="color:grey">{% blocktrans %}Your password can't be entirely numeric.{% endblocktrans %}<br></small>
     </div>
     <div class="form-group row form-inline">
-        <label for="password2" class="col-sm-3 col-form-label">Password confirmation</label>
+        <label for="password2" class="col-sm-3 col-form-label">{% blocktrans %}Password confirmation{% endblocktrans %}</label>
         <input id="password2" type="password" class="col-sm-9 form-control" name="password2">
     </div>
 

@@ -1,16 +1,15 @@
 {% extends 'layout.html' %}
+{% load i18n %} 
 {% block content %}
 {% load static %}
 {% load staticfiles %}
 <div class="row" id="result">
 <ul class="list-group col-12">
-    <li class="list-group-item">Your BMI</li>
+    <li class="list-group-item">{% blocktrans %}Your BMI{% endblocktrans %}</li>
     <li class="list-group-item"><b>{{bmi}}</b></li>
-    <li class="list-group-item">Your 10-year Atherosclerotic 
-        Cardiovascular Disease (including cardiac diseases and stroke) 
-        risk</li>
+    <li class="list-group-item">{% blocktrans %}Your 10-year Atherosclerotic Cardiovascular Disease (including cardiac diseases and stroke) risk{% endblocktrans %}</li>
     <li class="list-group-item"><b>{{ascvd_risk}}%</b></li>
-    <li class="list-group-item">Your risk of diabetes</li>
+    <li class="list-group-item">{% blocktrans %}Your risk of diabetes{% endblocktrans %}</li>
     <li class="list-group-item"><b>{{dm_risk}}%</b></li>
 </ul>
 </div>
@@ -20,96 +19,98 @@
 <form action=".", method="POST">
     {% csrf_token %}
     <div class="form-group row">
-    <label for="age" class="col-md-1 col-form-label">Age</label>
+        <label for="age" class="col-md-1 col-form-label">{% blocktrans %}Age{% endblocktrans %}</label>
         <div class="col-md-3">
             <input type="number" min=0 required class="form-control" name="age" placeholder="Age (year)" id="age"/>
         </div>
-    <label class="col-md-1 col-form-label" for="gender">Gender</label>
+        <label class="col-md-1 col-form-label" for="gender">{% blocktrans %}Gender{%endblocktrans%}</label>
+
+    
         <div class="col-md-3">
         <select class="form-control" name="gender" id="gender">
-          <option value=0>Female</option>
-          <option value=1>Male</option>
+            <option value=0>{% trans "Female" %}</option>
+            <option value=1>{% blocktrans %}Male{% endblocktrans %}</option>
         </select>
         </div>
-    <label class="col-md-1 col-form-label" for="race">Race</label>
+    <label class="col-md-1 col-form-label" for="race">{% blocktrans %}Race{% endblocktrans %}</label>
         <div class="col-md-3">
         <select class="form-control" name="race" id="race">
-          <option value=0>Other</option>
-          <option value=1>African American</option>
+          <option value=0>{% blocktrans %}Other{% endblocktrans %}</option>
+          <option value=1>{% blocktrans %}African American{% endblocktrans %}</option>
         </select>
         </div>
     </div>
 
     <div class="form-group row">
-    <label for="weight" class="col-md-2 col-form-label">Weight</label>
+    <label for="weight" class="col-md-2 col-form-label">{% blocktrans %}Weight{% endblocktrans %}</label>
         <div class="col-md-4">
-            <input type="number" min=0 required class="form-control" name="weight" placeholder="Weight (kg)" id="weight"/>
+            <input type="number" min=0 required class="form-control" name="weight" placeholder="{% blocktrans %}Weight (kg){% endblocktrans %}" id="weight"/>
         </div>
-    <label for="height" class="col-md-2 col-form-label">Height</label>
+    <label for="height" class="col-md-2 col-form-label">{% blocktrans %}Height{% endblocktrans %}</label>
         <div class="col-md-4">
-            <input type="number" min=0 required class="form-control" name="height" placeholder="Height (cm)" id="height"/>
-        </div>
-    </div>
-
-    <div class="form-group row">
-    <label for="sbp" class="col-md-2 col-form-label">SBP</label>
-        <div class="col-md-4">
-            <input type="number" min=0 required class="form-control" name="sbp" placeholder="Systolic Blood Pressure (mmHg)" id="sbp"/>
-        </div>
-    <label for="dbp" class="col-md-2 col-form-label">DBP</label>
-        <div class="col-md-4">
-            <input type="number" min=0 required class="form-control" name="dbp" placeholder="Diastolic Blood Pressure (mmHg)" id="dbp"/>
+            <input type="number" min=0 required class="form-control" name="height" placeholder="{% blocktrans %}Height (cm){% endblocktrans %}" id="height"/>
         </div>
     </div>
 
     <div class="form-group row">
-    <label for="tc" class="col-md-2 col-form-label">Total Cholesterol</label>
+    <label for="sbp" class="col-md-2 col-form-label">{% blocktrans %}SBP{% endblocktrans %}</label>
         <div class="col-md-4">
-            <input type="number" min=0 required class="form-control" name="tc" placeholder="Total Cholesterol (mg/dL)" id="tc"/>
+            <input type="number" min=0 required class="form-control" name="sbp" placeholder="{% blocktrans %}Systolic Blood Pressure (mmHg){% endblocktrans %}" id="sbp"/>
         </div>
-    <label for="hdl" class="col-md-2 col-form-label">HDL-Cholesterol</label>
+    <label for="dbp" class="col-md-2 col-form-label">{% blocktrans %}DBP{% endblocktrans %}</label>
         <div class="col-md-4">
-            <input type="number" min=0 required class="form-control" name="hdl" placeholder="HDL-Cholesterol (mg/dL)" id="hdl"/>
+            <input type="number" min=0 required class="form-control" name="dbp" placeholder="{% blocktrans %}Diastolic Blood Pressure (mmHg){% endblocktrans %}" id="dbp"/>
         </div>
     </div>
 
     <div class="form-group row">
-    <label for="smoker" class="col-md-2 col-form-label">Smoking Status</label>
+    <label for="tc" class="col-md-2 col-form-label">{% blocktrans %}Total Cholesterol{% endblocktrans %}</label>
+        <div class="col-md-4">
+            <input type="number" min=0 required class="form-control" name="tc" placeholder="{% blocktrans %}Total Cholesterol (mg/dL){% endblocktrans %}" id="tc"/>
+        </div>
+    <label for="hdl" class="col-md-2 col-form-label">{% blocktrans %}HDL-Cholesterol{% endblocktrans %}</label>
+        <div class="col-md-4">
+            <input type="number" min=0 required class="form-control" name="hdl" placeholder="{% blocktrans %}HDL-Cholesterol (mg/dL){% endblocktrans %}" id="hdl"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+    <label for="smoker" class="col-md-2 col-form-label">{% blocktrans %}Smoking Status{% endblocktrans %}</label>
         <div class="col-md-4">
             <select class="form-control" name="smoker">
-                <option value="0">Non-smoker</option>
-                <option value="1">Ex-smoker</option>
-                <option value="2">Current smoker</option>
+                <option value="0">{% blocktrans %}Non-smoker{% endblocktrans %}</option>
+                <option value="1">{% blocktrans %}Ex-smoker{% endblocktrans %}</option>
+                <option value="2">{% blocktrans %}Current smoker{% endblocktrans %}</option>
             </select>
         </div>
-    <label class="col-md-2 col-form-label" for="family_hx">Family History</label>
+    <label class="col-md-2 col-form-label" for="family_hx">{% blocktrans %}Family History{% endblocktrans %}</label>
         <div class="col-md-4">
             <select class="form-control" name="family_hx">
-                <option value="0">No diabetic 1st-degree relatives</option>
-                <option value="1">Parent or sibling with diabetes</option>
-                <option value="2">Parent and sibling with diabetes</option>
+                <option value="0">{% blocktrans %}No diabetic 1st-degree relatives{% endblocktrans %}</option>
+                <option value="1">{% blocktrans %}Parent or sibling with diabetes{% endblocktrans %}</option>
+                <option value="2">{% blocktrans %}Parent and sibling with diabetes{% endblocktrans %}</option>
             </select>
         </div>
 
-    <label for="is_dm" class="col-12 col-form-label">Are you diagnosed with diabetes?</label>
+    <label for="is_dm" class="col-12 col-form-label">{% blocktrans %}Are you diagnosed with diabetes?{% endblocktrans %}</label>
         <div class="col-12">
             <select class="form-control" name="is_dm">
-                <option value="0">Not diagnosed with diabetes</option>
-                <option value="1">Already been diagnosed with diabetes</option>
+                <option value="0">{% blocktrans %}Not diagnosed with diabetes{% endblocktrans %}</option>
+                <option value="1">{% blocktrans %}Already been diagnosed with diabetes{% endblocktrans %}</option>
             </select>
         </div>
-    <label class="col-12 col-form-label" for="is_treated_htn">Are you taking antihypertensive agents?</label>
+    <label class="col-12 col-form-label" for="is_treated_htn">{% blocktrans %}Are you taking antihypertensive agents?{% endblocktrans %}</label>
         <div class="col-12">
         <select class="form-control" name="is_treated_htn" id="is_treated_htn">
-          <option value=0>Not taking any antihypertensive</option>
-          <option value=1>Currently taking antihypertensive</option>
+          <option value=0>{% blocktrans %}Not taking any antihypertensive{% endblocktrans %}</option>
+          <option value=1>{% blocktrans %}Currently taking antihypertensive{% endblocktrans %}</option>
         </select>
         </div>
-    <label class="col-12 col-form-label" for="is_steroid">Are you taking steroids?</label>
+    <label class="col-12 col-form-label" for="is_steroid">{% blocktrans %}Are you taking steroids?{% endblocktrans %}</label>
         <div class="col-12">
         <select class="form-control" name="is_steroid" id="is_steroid">
-          <option value=0>Not taking any steroids</option>
-          <option value=1>Currently taking steroids</option>
+          <option value=0>{% blocktrans %}Not taking any steroids{% endblocktrans %}</option>
+          <option value=1>{% blocktrans %}Currently taking steroids{% endblocktrans %}</option>
         </select>
         </div>
     </div>
@@ -120,7 +121,7 @@
 {% if user.is_active %}
     <div class="card col-12">
         <div class="card-header">
-            <h4> Your previous BMI </h4>
+            <h4>{% blocktrans %}Your previous BMI{% endblocktrans %} </h4>
         </div>
         <div class="card-block">
             <canvas id="bmiChart"></canvas>
@@ -128,7 +129,7 @@
     </div>
     <div class="card col-12">
         <div class="card-header">
-            <h4> Your previous blood pressure </h4>
+            <h4>{% blocktrans %}Your previous blood pressure{% endblocktrans %}</h4>
         </div>
         <div class="card-block">
             <canvas id="bpChart"></canvas>
@@ -157,8 +158,7 @@
     dataBmi = transformData(data, 'bmi');
     dataSBP = transformData(data, 'sbp');
     dataDBP = transformData(data, 'dbp');
-    drawLineChart(ctxBmi, [dataBmi], ["BMI"]);
-    drawLineChart(ctxBp, [dataSBP, dataDBP], ["SBP", "DBP"]);
+drawLineChart(ctxBmi, [dataBmi], ["{% trans 'BMI' %}"], "BMI");
+drawLineChart(ctxBp, [dataSBP, dataDBP], ["{% trans 'SBP' %}", "{% trans 'DBP' %}"], "BP");
 </script>
 {% endblock %}
-

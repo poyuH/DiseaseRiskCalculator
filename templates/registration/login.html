@@ -1,17 +1,18 @@
 {% extends "layout.html"%}
+{% load i18n %} 
 {% block content %}
 <form action={% url 'login'%}  method="POST">
     {% csrf_token %}
     <div class="form-group row">
-        <label for="username" class="col-sm-3 col-form-label">Email address</label>
+        <label for="username" class="col-sm-3 col-form-label">{% blocktrans %}Email address{% endblocktrans %}</label>
         <input class="form-control col-sm-9" type="email" name="username" value="" id="username">
     </div>
     <div class="form-group row">
-        <label for="password" class="col-sm-3 col-form-label">Password</label>
+        <label for="password" class="col-sm-3 col-form-label">{% blocktrans %}Password{% endblocktrans %}</label>
         <input class="form-control col-sm-9" type="password" name="password" value="" id="password">
     </div>
-    <input class="btn btn-primary" type="submit" value="Login" name="login" />
+    <input class="btn btn-primary" type="submit" value="{% blocktrans %}Login{% endblocktrans %}" name="login" />
     <a href={% url 'password_reset' %}>
-        <input class="btn btn-secondary"  type="button" name="password_reset" value="Reset Password"></a>
+        <input class="btn btn-secondary"  type="button" name="password_reset" value="{% blocktrans %}Reset Password{% endblocktrans %}"></a>
 </form>
 {% endblock %}

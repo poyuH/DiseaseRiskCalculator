@@ -1,5 +1,6 @@
+{% load i18n %} 
 <nav class="fixed-top navbar navbar-dark bg-dark navbar-expand-md">
-    <a class="navbar-brand text-center mr-auto" href='/calc' style="padding-right: 20px">CV & DM risk calculator</a>
+    <a class="navbar-brand text-center mr-auto" href='/calc' style="padding-right: 20px">{% blocktrans %}CV & DM risk calculator{% endblocktrans %}</a>
     <button class='navbar-toggler' data-toggle="collapse" data-target="#navbarMenu">
         <span class='navbar-toggler-icon'></span>
     </button>
@@ -10,14 +11,14 @@
         <ul class="navbar-nav list-group ml-auto">
             {% if user.is_active %}
             <li class="nav-item list-group-item bg-dark" >
-                <a href={% url 'logout' %} class="nav-link">Logout</a>
+                <a href={% url 'logout' %} class="nav-link">{% blocktrans %}Logout{% endblocktrans %}</a>
             </li>
             {% else %}
             <li class="nav-item list-group-item bg-dark">
-                <a href={% url 'login' %} class="nav-link">Login</a>
+                <a href={% url 'login' %} class="nav-link">{% blocktrans %}Login{% endblocktrans %}</a>
             </li>
             <li class="nav-item list-group-item bg-dark">
-                <a href={% url 'register' %} class="nav-link">Register</a>
+                <a href={% url 'register' %} class="nav-link">{% blocktrans %}Register{% endblocktrans %}</a>
             </li>
             {% endif %}
         </ul>

@@ -4,17 +4,17 @@ function transformData(data, keyY) {
 
     for (i = 0; i < data['date'].length; i++) {
         new_data.push(
-            {x: new Date(data['date'][i]), y: data[keyY][i]}
+            {x: new Date(data['date'][i]), y: data[keyY][i]},
         );
     };
     return(new_data);
 };
 
-function drawLineChart(ctx, data, label) {
+function drawLineChart(ctx, data, label, chartType) {
 // data and label are nested arrays
 var backgroundColor = 'rgba(153, 102, 200, 0.2)';
 var borderColor = 'rgba(153, 102, 200, 1)';
-if (label[0] == 'BMI') {
+if (chartType == 'BMI') {
     var dataSets = [{
         label: label[0],
         data: data[0],
@@ -23,7 +23,7 @@ if (label[0] == 'BMI') {
         borderWidth: 1
     }]
 }
-if (label[0] == 'SBP'){
+if (chartType == 'BP'){
     var dataSets = [{
         label: label[0],
         data: data[0],
@@ -49,7 +49,10 @@ var myChart = new Chart(ctx, {
             xAxes: [{
                 type: 'time',
                 time: {
-                    unit: 'day'
+                    displayFormats: {
+                        day: 'MM/DD/YYYY'
+                    },
+                    unit: 'day',
                 }
             }],
             yAxes: [{
