@@ -15,11 +15,13 @@ def calculator(request):
     objects = None
     risk_dict = {'bmi': ' ', 'ascvd_risk': ' ', 'dm_risk': ' '}
     gender, race, age = None, None, None
+    is_dm = False
 
     if request.method == 'POST':
         form = CalculatorForm(request.POST)
         if form.is_valid():
             risk_dict = _calculate_risk(form)
+            is_dm = form.cleaned_data['is_dm']
             # update or save data
             if request.user.is_active:
                 all_dict = {'uid': request.user, 'date': date.today()}
@@ -50,7 +52,7 @@ def calculator(request):
                   {'form': form, 'bmi': risk_dict['bmi'],
                    'ascvd_risk': risk_dict['ascvd_risk'],
                    'dm_risk': risk_dict['dm_risk'],
-                   'gender': gender, 'race': race, 'age': age,
+                   'gender': gender, 'race': race, 'age': age, 'is_dm': is_dm,
                    'data': json.dumps(data)})
 
 

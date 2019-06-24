@@ -9,8 +9,20 @@
     <li class="list-group-item"><b>{{bmi}}</b></li>
     <li class="list-group-item">{% blocktrans %}Your 10-year Atherosclerotic Cardiovascular Disease (including cardiac diseases and stroke) risk{% endblocktrans %}</li>
     <li class="list-group-item"><b>{{ascvd_risk}}%</b></li>
+    {% if not is_dm %}
     <li class="list-group-item">{% blocktrans %}Your risk of diabetes{% endblocktrans %}</li>
     <li class="list-group-item"><b>{{dm_risk}}%</b></li>
+    {% endif %}
+    <li class="list-group-item"><b>{% blocktrans %}Login or Register to record your health {% endblocktrans %}</b></li>
+    <li class="list-group-item">
+        <a href={% url 'login' %}>
+            <input class="btn btn-primary"  type="button" value="{% blocktrans %}Login{% endblocktrans %}">
+        </a>
+        <a href={% url 'register' %}>
+            <input class="btn btn-secondary"  type="button" value="{% blocktrans %}Register{% endblocktrans %}">
+        </a>
+        
+    </li>
 </ul>
 </div>
 
