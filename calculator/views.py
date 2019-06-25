@@ -14,14 +14,18 @@ def calculator(request):
     data = {'date': [], 'bmi': [], 'sbp': [], 'dbp': []}
     objects = None
     risk_dict = {'bmi': ' ', 'ascvd_risk': ' ', 'dm_risk': ' '}
-    gender, race, age = None, None, None
+    gender, race, age, tc, hdl= None, None, None, None, None
+    height, weight = None, None
     is_dm = False
+    is_treated_htn = False
+    is_steroid = False
+    smoker = 0
+    family_hx = 0
 
     if request.method == 'POST':
         form = CalculatorForm(request.POST)
         if form.is_valid():
             risk_dict = _calculate_risk(form)
-            is_dm = form.cleaned_data['is_dm']
             # update or save data
             if request.user.is_active:
                 all_dict = {'uid': request.user, 'date': date.today()}
@@ -39,21 +43,34 @@ def calculator(request):
         race = request.user.race
         age = date.today().year - request.user.birthyear
 
-    # use objects for Chart.js function
-    objects = _filter_data_by_uid(request.user.id)
-    for o in objects:
-        str_date = o.date.strftime("%m/%d/%Y")
-        data['date'].append(str_date)
-        data['bmi'].append(o.bmi)
-        data['sbp'].append(o.sbp)
-        data['dbp'].append(o.dbp)
+        # use objects for Chart.js function
+        objects = _filter_data_by_uid(request.user.id)
+        for o in objects:
+            str_date = o.date.strftime("%m/%d/%Y")
+            data['date'].append(str_date)
+            data['bmi'].append(o.bmi)
+            data['sbp'].append(o.sbp)
+            data['dbp'].append(o.dbp)
+            is_dm = o.is_dm
+            is_treated_htn = o.is_treated_htn
+            is_steroid = o.is_steroid
+            hdl = o.hdl
+            tc = o.tc
+            smoker = o.smoker
+            family_hx = o.family_hx
+            height = o.height
+            weight = o.weight
+
 
     return render(request, 'calculator.html',
                   {'form': form, 'bmi': risk_dict['bmi'],
                    'ascvd_risk': risk_dict['ascvd_risk'],
                    'dm_risk': risk_dict['dm_risk'],
                    'gender': gender, 'race': race, 'age': age, 'is_dm': is_dm,
-                   'data': json.dumps(data)})
+                   'is_treated_htn': is_treated_htn, 'is_steroid': is_steroid,
+                   'hdl': hdl, 'tc': tc, 'smoker': smoker, 'height': height,
+                   'weight': weight,
+                   'family_hx': family_hx, 'data': json.dumps(data)})
 
 
 def _filter_data_by_uid(uid):

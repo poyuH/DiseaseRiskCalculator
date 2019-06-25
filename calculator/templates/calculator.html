@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 {% load staticfiles %}
-<div class="row" id="result">
+<div class="row" id="result" style="display:None">
 <ul class="list-group col-12">
     <li class="list-group-item">{% blocktrans %}Your BMI{% endblocktrans %}</li>
     <li class="list-group-item"><b>{{bmi}}</b></li>
@@ -13,16 +13,15 @@
     <li class="list-group-item">{% blocktrans %}Your risk of diabetes{% endblocktrans %}</li>
     <li class="list-group-item"><b>{{dm_risk}}%</b></li>
     {% endif %}
+    {% if not user.is_active %}
     <li class="list-group-item"><b>{% blocktrans %}Login or Register to record your health {% endblocktrans %}</b></li>
     <li class="list-group-item">
         <a href={% url 'login' %}>
-            <input class="btn btn-primary"  type="button" value="{% blocktrans %}Login{% endblocktrans %}">
-        </a>
+            <input class="btn btn-primary"  type="button" value="{% blocktrans %}Login{% endblocktrans %}"></a>
         <a href={% url 'register' %}>
-            <input class="btn btn-secondary"  type="button" value="{% blocktrans %}Register{% endblocktrans %}">
-        </a>
-        
+            <input class="btn btn-secondary"  type="button" value="{% blocktrans %}Register{% endblocktrans %}"></a>
     </li>
+    {% endif %}
 </ul>
 </div>
 
@@ -89,7 +88,7 @@
     <div class="form-group row">
     <label for="smoker" class="col-md-2 col-form-label">{% blocktrans %}Smoking Status{% endblocktrans %}</label>
         <div class="col-md-4">
-            <select class="form-control" name="smoker">
+            <select class="form-control" id="smoker" name="smoker">
                 <option value="0">{% blocktrans %}Non-smoker{% endblocktrans %}</option>
                 <option value="1">{% blocktrans %}Ex-smoker{% endblocktrans %}</option>
                 <option value="2">{% blocktrans %}Current smoker{% endblocktrans %}</option>
@@ -97,7 +96,7 @@
         </div>
     <label class="col-md-2 col-form-label" for="family_hx">{% blocktrans %}Family History{% endblocktrans %}</label>
         <div class="col-md-4">
-            <select class="form-control" name="family_hx">
+            <select class="form-control" id="family_hx" name="family_hx">
                 <option value="0">{% blocktrans %}No diabetic 1st-degree relatives{% endblocktrans %}</option>
                 <option value="1">{% blocktrans %}Parent or sibling with diabetes{% endblocktrans %}</option>
                 <option value="2">{% blocktrans %}Parent and sibling with diabetes{% endblocktrans %}</option>
@@ -106,7 +105,7 @@
 
     <label for="is_dm" class="col-12 col-form-label">{% blocktrans %}Are you diagnosed with diabetes?{% endblocktrans %}</label>
         <div class="col-12">
-            <select class="form-control" name="is_dm">
+            <select class="form-control" name="is_dm" id="is_dm">
                 <option value="0">{% blocktrans %}Not diagnosed with diabetes{% endblocktrans %}</option>
                 <option value="1">{% blocktrans %}Already been diagnosed with diabetes{% endblocktrans %}</option>
             </select>
@@ -153,14 +152,23 @@
 <!-- Material Design Bootstrap -->
 <script>
     $(document).ready(function(){
+        if ("{{bmi}}" != " "){
+            $('#result').css("display", "block");
+        };
         if ("{{user.is_active}}" == "True") {
+
             $('#age').val({{age}});
             $('#race').val({{race}});
             $('#gender').val({{gender}});
-        };
-        if ("{{bmi}}" == " "){
-            console.log({{bmi}});
-            $('#result').css("display", "None");
+            $('#height').val({{height}});
+            $('#weight').val({{weight}});
+            $('#hdl').val({{hdl}});
+            $('#tc').val({{tc}});
+            $('#is_steroid').val({{is_steroid}});
+            $('#is_treated_htn').val({{is_treated_htn}});
+            $('#is_dm').val({{is_treated_htn}});
+            $('#smoker').val({{smoker}});
+            $('#family_hx').val({{family_hx}});
         };
     });
 
