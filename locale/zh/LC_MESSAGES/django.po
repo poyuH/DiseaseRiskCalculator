@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-24 14:10+0800\n"
+"POT-Creation-Date: 2019-06-25 10:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,165 +27,182 @@ msgid ""
 "diseases and stroke) risk"
 msgstr "您的十年冠狀動脈疾病（含心臟病及中風）風險"
 
-#: calculator/templates/calculator.html:12
+#: calculator/templates/calculator.html:13
 msgid "Your risk of diabetes"
 msgstr "您目前患糖尿病的機率"
 
-#: calculator/templates/calculator.html:22
+#: calculator/templates/calculator.html:17
+msgid "Login or Register to record your health "
+msgstr "登入或註冊來記錄健康狀況"
+
+#: calculator/templates/calculator.html:20 templates/nav.html:18
+#: templates/registration/login.html:14
+msgid "Login"
+msgstr "登入"
+
+#: calculator/templates/calculator.html:22 templates/nav.html:21
+msgid "Register"
+msgstr "註冊"
+
+#: calculator/templates/calculator.html:33
 msgid "Age"
 msgstr "年齡"
 
-#: calculator/templates/calculator.html:26 user/templates/register.html:24
+#: calculator/templates/calculator.html:35
+msgid "Age (year)"
+msgstr "年齡 (year)"
+
+#: calculator/templates/calculator.html:37 user/templates/register.html:24
 msgid "Gender"
 msgstr "性別"
 
-#: calculator/templates/calculator.html:31 user/templates/register.html:26
+#: calculator/templates/calculator.html:42 user/templates/register.html:26
 msgid "Female"
 msgstr "女性"
 
-#: calculator/templates/calculator.html:32 user/templates/register.html:27
+#: calculator/templates/calculator.html:43 user/templates/register.html:27
 msgid "Male"
 msgstr "男性"
 
-#: calculator/templates/calculator.html:35 user/templates/register.html:32
+#: calculator/templates/calculator.html:46 user/templates/register.html:32
 msgid "Race"
 msgstr "種族"
 
-#: calculator/templates/calculator.html:38 user/templates/register.html:34
+#: calculator/templates/calculator.html:49 user/templates/register.html:34
 msgid "Other"
 msgstr "其他"
 
-#: calculator/templates/calculator.html:39 user/templates/register.html:35
+#: calculator/templates/calculator.html:50 user/templates/register.html:35
 msgid "African American"
 msgstr "非裔美國人"
 
-#: calculator/templates/calculator.html:45
+#: calculator/templates/calculator.html:56
 msgid "Weight"
 msgstr "體重"
 
-#: calculator/templates/calculator.html:47
+#: calculator/templates/calculator.html:58
 msgid "Weight (kg)"
 msgstr "體重 (kg)"
 
-#: calculator/templates/calculator.html:49
+#: calculator/templates/calculator.html:60
 msgid "Height"
 msgstr "身高"
 
-#: calculator/templates/calculator.html:51
+#: calculator/templates/calculator.html:62
 msgid "Height (cm)"
 msgstr "身高 (cm)"
 
-#: calculator/templates/calculator.html:56
-#: calculator/templates/calculator.html:162
+#: calculator/templates/calculator.html:67
+#: calculator/templates/calculator.html:181
 msgid "SBP"
 msgstr "收縮壓"
 
-#: calculator/templates/calculator.html:58
+#: calculator/templates/calculator.html:69
 msgid "Systolic Blood Pressure (mmHg)"
 msgstr "收縮壓 (mmHg)"
 
-#: calculator/templates/calculator.html:60
-#: calculator/templates/calculator.html:162
+#: calculator/templates/calculator.html:71
+#: calculator/templates/calculator.html:181
 msgid "DBP"
 msgstr "舒張壓"
 
-#: calculator/templates/calculator.html:62
+#: calculator/templates/calculator.html:73
 msgid "Diastolic Blood Pressure (mmHg)"
 msgstr "舒張壓 (mmHg)"
 
-#: calculator/templates/calculator.html:67
+#: calculator/templates/calculator.html:78
 msgid "Total Cholesterol"
 msgstr "總膽固醇"
 
-#: calculator/templates/calculator.html:69
+#: calculator/templates/calculator.html:80
 msgid "Total Cholesterol (mg/dL)"
 msgstr "總膽固醇 (mg/dL)"
 
-#: calculator/templates/calculator.html:71
+#: calculator/templates/calculator.html:82
 msgid "HDL-Cholesterol"
 msgstr "高密度膽固醇"
 
-#: calculator/templates/calculator.html:73
+#: calculator/templates/calculator.html:84
 msgid "HDL-Cholesterol (mg/dL)"
 msgstr "高密度膽固醇 (mg/dL)"
 
-#: calculator/templates/calculator.html:78
+#: calculator/templates/calculator.html:89
 msgid "Smoking Status"
 msgstr "抽菸狀況"
 
-#: calculator/templates/calculator.html:81
+#: calculator/templates/calculator.html:92
 msgid "Non-smoker"
 msgstr "從未抽菸"
 
-#: calculator/templates/calculator.html:82
+#: calculator/templates/calculator.html:93
 msgid "Ex-smoker"
 msgstr "已戒菸"
 
-#: calculator/templates/calculator.html:83
+#: calculator/templates/calculator.html:94
 msgid "Current smoker"
 msgstr "仍在抽菸"
 
-#: calculator/templates/calculator.html:86
+#: calculator/templates/calculator.html:97
 msgid "Family History"
 msgstr "家族史"
 
-#: calculator/templates/calculator.html:89
+#: calculator/templates/calculator.html:100
 msgid "No diabetic 1st-degree relatives"
 msgstr "一等親皆無糖尿病"
 
-#: calculator/templates/calculator.html:90
+#: calculator/templates/calculator.html:101
 msgid "Parent or sibling with diabetes"
 msgstr "父母「或」兄弟姊妹有糖尿病"
 
-#: calculator/templates/calculator.html:91
+#: calculator/templates/calculator.html:102
 msgid "Parent and sibling with diabetes"
 msgstr "父母「和」兄弟姊妹有糖尿病"
 
-#: calculator/templates/calculator.html:95
+#: calculator/templates/calculator.html:106
 msgid "Are you diagnosed with diabetes?"
 msgstr "您有被診斷為糖尿病嗎？"
 
-#: calculator/templates/calculator.html:98
+#: calculator/templates/calculator.html:109
 msgid "Not diagnosed with diabetes"
 msgstr "沒有被診斷為糖尿病"
 
-#: calculator/templates/calculator.html:99
+#: calculator/templates/calculator.html:110
 msgid "Already been diagnosed with diabetes"
 msgstr "已經被診斷為糖尿病"
 
-#: calculator/templates/calculator.html:102
+#: calculator/templates/calculator.html:113
 msgid "Are you taking antihypertensive agents?"
 msgstr "您是否正在服用高血壓藥物？"
 
-#: calculator/templates/calculator.html:105
+#: calculator/templates/calculator.html:116
 msgid "Not taking any antihypertensive"
 msgstr "沒有服用高血壓藥物"
 
-#: calculator/templates/calculator.html:106
+#: calculator/templates/calculator.html:117
 msgid "Currently taking antihypertensive"
 msgstr "現在有服用高血壓藥物"
 
-#: calculator/templates/calculator.html:109
+#: calculator/templates/calculator.html:120
 msgid "Are you taking steroids?"
 msgstr "您是否正在服用類固醇？"
 
-#: calculator/templates/calculator.html:112
+#: calculator/templates/calculator.html:123
 msgid "Not taking any steroids"
 msgstr "沒有服用類固醇"
 
-#: calculator/templates/calculator.html:113
+#: calculator/templates/calculator.html:124
 msgid "Currently taking steroids"
 msgstr "現在有服用類固醇"
 
-#: calculator/templates/calculator.html:124
+#: calculator/templates/calculator.html:135
 msgid "Your previous BMI"
 msgstr "您之前的身體質量指數"
 
-#: calculator/templates/calculator.html:132
+#: calculator/templates/calculator.html:143
 msgid "Your previous blood pressure"
 msgstr "您之前的血壓"
 
-#: calculator/templates/calculator.html:161
+#: calculator/templates/calculator.html:180
 msgid "BMI"
 msgstr "身體質量指數"
 
@@ -196,14 +213,6 @@ msgstr "心血管疾病及糖尿病風險計算"
 #: templates/nav.html:14
 msgid "Logout"
 msgstr "登出"
-
-#: templates/nav.html:18 templates/registration/login.html:14
-msgid "Login"
-msgstr "登入"
-
-#: templates/nav.html:21
-msgid "Register"
-msgstr "註冊"
 
 #: templates/registration/login.html:7 user/templates/register.html:16
 msgid "Email address"
