@@ -48,6 +48,9 @@ var myChart = new Chart(ctx, {
         scales: {
             xAxes: [{
                 type: 'time',
+                ticks: {
+                    source: 'data',
+                },
                 time: {
                     displayFormats: {
                         day: 'MM/DD/YYYY'
