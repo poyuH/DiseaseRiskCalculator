@@ -1,2 +1,4 @@
 # DiseaseRiskCalculator
-A website for calculating disease risk and provided trend in line chart
+A website for calculating cardiovascular diseases and diabetes risks, and also provide trend in line chart
+
+Link: https://tinyurl.com/y4tnhw6a
